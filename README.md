@@ -1,49 +1,34 @@
-The Pytorch implementaion of the paper: Joint Embedding of Deep Visual and Semantic Features for Medical Image Report Generation, IEEE Transactions on Multimedia, 2021.
+# TriNet
 
-Authors: Yan Yang, Jun Yu*, Jian Zhang, Weidong Han*, Hanliang Jiang, and Qingming Huang
+## 论文
 
-If you find our work or our code helpful for your research, please cite our paper.
+Joint Embedding of Deep Visual and Semantic Features for Medical Image Report Generation
 
-# Dependencies
-  - Python=3.7.3
-  - pytorch=1.8.1
-  - pickle
-  - tqdm
-  - time
-  - argparse
-  - matplotlib
-  - sklearn
-  - json
-  - numpy 
-  - torchvision 
-  - itertools
-  - collections
-  - math
-  - os
-  - matplotlib
-  - PIL 
-  - itertools
-  - copy
-  - re
-  - abc
-  - pandas
-  - torch
+## 源码链接
 
-The ground-truth TF-IDF features of MeSH and MeRP in the training set are constructed before training with codes in TF-IDF folder.
+https://github.com/yangyan22/Medical-Report-Generation-TriNet
 
-The IF-IDF folder contains:
- 1. the build_vocab_TF-IDF.py (for constructing the vocabulary in TF-IDF construction with a vocab_TF-IDF.json)
- 2. mesh_tag.py (to select the top 30 MeSH and obtain the MeSH information for each study)
- 3. TF_IDF_MeRP.py (to construct the report TF-IDF vector for each study)
- 4. TF_IDF_MeSH.py (to construct the MeSh TF-IDF vector for each study)
+## 数据集
 
-# reference codes: 
-https://github.com/ZexinYan/Medical-Report-Generation
+- Liver_Dataset
+- Mammary_Dataset
+- Thyroid_Dataset
 
-https://github.com/tylin/coco-caption
+## 运行
 
-https://github.com/MorvanZhou/NLP-Tutorials
+1、运行utils/bulid_vocab生成vocab.pkl
+2、运行TF_IDF/bulid_vocab_TF-IDF生成vocab_TF-IDF.json，运行时回打印出词汇表长度，记录下来
+3、运行TF_IDF/TF_IDF_MeRP生成TF_IDF_Report.json
+4、修改utls/datasets中的__getitem__方法的DATA_PATH为图片位置
+5、修改trainer的DATA_PATH、RESUME_MODEL_PATH、--model_path，将--report_dim改为词汇表长度，修改s_max（单篇报告最多句数），n_max（单句最多词数）为合适值
+6、运行trainer
+7、修改相关参数，运行tester
 
-# the metric meteor
-the paraphrase-en.gz should be put into the .\pycocoevalcap\meteor\data, since the file is too big to upload.
+## 结果
+
+--model_path中的print_epochs.csv保存的是pycocoevalcap的结果，report保存的是最后一个epoch的生成结果，--model_path/reuslt中保存的是验证集上得到最好结果的模型生成的报告
+
+## 备注
+
+- 数据集的数据量除以batch_size的余数不能为1，否则会报错
 
