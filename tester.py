@@ -112,7 +112,7 @@ class CaptionSampler(object):
             if word == '<end>' or word == '<pad>':
                 break
             sampled_caption.append(word)
-        return ' '.join(sampled_caption)
+        return ''.join(sampled_caption)
 
     def generate(self):
         self.extractor.eval()
@@ -173,8 +173,8 @@ class CaptionSampler(object):
         result_path = os.path.join(self.args.model_dir, self.args.result_path)
         if not os.path.exists(result_path):
             os.makedirs(result_path)
-        with open(os.path.join(result_path, '{}.json'.format(self.args.result_name)), 'w') as f:
-            json.dump(results, f)
+        with open(os.path.join(result_path, '{}.json'.format(self.args.result_name)), 'w', encoding='utf-8-sig') as f:
+            json.dump(results, f, ensure_ascii=False)
 
         gts = []
         res = []
@@ -195,36 +195,36 @@ class CaptionSampler(object):
                                   {i: [re] for i, re in enumerate(res)})
         print(test_met)
 
-        with open(result_path + '/report.csv', 'w', encoding='utf-8-sig') as f:
+        with open(result_path + '/report.csv', 'w', encoding='utf-8-sig', newline='') as f:
             writer = csv.writer(f)
+            writer.writerow(['uid', 'Ground Truth', 'Predict'])
             for key in results:
-                ps = list(results[key]['Pred Sent'].values())
-                rs = list(results[key]['Real Sent'].values())
-                writer.writerow([key] + ps)
-                writer.writerow([key] + rs)
+                ps = [','.join(list(results[key]['Pred Sent'].values())).strip(',') + '。']
+                rs = [','.join(list(results[key]['Real Sent'].values())).strip(',') + '。']
+                writer.writerow([key] + rs + ps)
 
 if __name__ == '__main__':
     import warnings
     warnings.filterwarnings("ignore")
     parser = argparse.ArgumentParser()
-    DATA_Path = 'D:/postgraduate0/Medical-Report-Generation-TriNet/Medical-Report-Generation-TriNet-main/data/CN'
+    DATA_Path = 'D:/postgraduate0/Medical-Report-Generation-TriNet/Medical-Report-Generation-TriNet-main/data/CN/Mammary'
 
     parser.add_argument('--vocab_path', type=str, default=DATA_Path + '/vocab.pkl', help='path for vocabulary')
-    parser.add_argument('--data_dir', type=str, default=DATA_Path + '/Liver_annotation.json', help='path for images')
+    parser.add_argument('--data_dir', type=str, default=DATA_Path + '/Mammary_annotation.json', help='path for images')
 
     parser.add_argument('--report_tf_idf', type=str, default=DATA_Path + "/TF_IDF_Report.json", help='path of report_tf_idf')
 
-    parser.add_argument('--model_dir', type=str, default='./models/2022-06-15 19-30/', help='path of model')
+    parser.add_argument('--model_dir', type=str, default='./models/2022-06-20 10-14/', help='path of model')
     parser.add_argument('--load_model_path', type=str, default='val_best.pth.tar', help='path of trained model')
     parser.add_argument('--resize', type=int, default=224, help='size for resizing images')
     parser.add_argument('--result_path', type=str, default='results', help='the path for storing results')
     parser.add_argument('--result_name', type=str, default='results', help='the name of json results')
 
-    parser.add_argument('--report_dim', type=int, default=254)
+    parser.add_argument('--report_dim', type=int, default=352)
     parser.add_argument('--embed_size', type=int, default=512)
     parser.add_argument('--hidden_size', type=int, default=512)
-    parser.add_argument('--s_max', type=int, default=7)
-    parser.add_argument('--n_max', type=int, default=20)
+    parser.add_argument('--s_max', type=int, default=25)
+    parser.add_argument('--n_max', type=int, default=10)
     parser.add_argument('--batch_size', type=int, default=3)
 
     args = parser.parse_args()
