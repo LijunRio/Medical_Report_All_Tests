@@ -16,13 +16,13 @@ https://github.com/yangyan22/Medical-Report-Generation-TriNet
 
 ## 运行
 
-1、运行utils/bulid_vocab生成vocab.pkl
-2、运行TF_IDF/bulid_vocab_TF-IDF生成vocab_TF-IDF.json，运行时回打印出词汇表长度，记录下来
-3、运行TF_IDF/TF_IDF_MeRP生成TF_IDF_Report.json
-4、修改utls/datasets中的__getitem__方法的DATA_PATH为图片位置
-5、修改trainer的DATA_PATH、RESUME_MODEL_PATH、--model_path，将--report_dim改为词汇表长度，修改s_max（单篇报告最多句数），n_max（单句最多词数）为合适值
-6、运行trainer
-7、修改相关参数，运行tester
+- 运行utils/bulid_vocab生成vocab.pkl
+- 运行TF_IDF/bulid_vocab_TF-IDF生成vocab_TF-IDF.json，运行时回打印出词汇表长度，记录下来
+- 运行TF_IDF/TF_IDF_MeRP生成TF_IDF_Report.json
+- 修改utls/datasets中的__getitem__方法的DATA_PATH为图片位置
+- 修改trainer的DATA_PATH、RESUME_MODEL_PATH、--model_path，将--report_dim改为词汇表长度，修改s_max（单篇报告最多句数），n_max（单句最多词数）为合适值
+- 运行trainer
+- 修改相关参数，运行tester
 
 ## 结果
 

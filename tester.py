@@ -225,7 +225,7 @@ if __name__ == '__main__':
     parser.add_argument('--hidden_size', type=int, default=512)
     parser.add_argument('--s_max', type=int, default=25)
     parser.add_argument('--n_max', type=int, default=10)
-    parser.add_argument('--batch_size', type=int, default=3)
+    parser.add_argument('--batch_size', type=int, default=4)
 
     args = parser.parse_args()
     args.cuda = torch.cuda.is_available()
