@@ -10,21 +10,21 @@ https://github.com/ZexinYan/Medical-Report-Generation
 
 # 数据集
 
-Liver_Dataset
+- Liver_Dataset
 
-Mammary_Dataset
+- Mammary_Dataset
 
-Thyroid_Dataset
+- Thyroid_Dataset
 
 ## 运行
 
-运行utlis/prepare.py生成所需文件
+- 运行utlis/prepare.py生成所需文件
 
-运行ultis/bulid_vocab.py生成所需文件
+- 运行ultis/bulid_vocab.py生成所需文件
 
-修改路径，运行trainer
+- 修改路径，运行trainer
 
-修改路径，运行tester
+- 修改路径，运行tester
 
 ## 结果
 
