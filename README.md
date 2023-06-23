@@ -1,5 +1,0 @@
-# 报告生成SOTA测试
-
-| Joint Embedding of Deep Visual and Semantic Features for Medical Image Report Generation | [GitHub - yangyan22/Medical-Report-Generation-TriNet: Joint Embedding of Deep Visual and Semantic Features for Medical Image Report Generation](https://github.com/yangyan22/Medical-Report-Generation-TriNet) | 可以 | 1、需要找一个img2othersFull.pkl的文件 2、需要先把TF-IDF的文件跑一遍生成所需文件 3、dataset中116行要去掉.split('/')[1] 4、dataset中118、119行要删掉 5、数据量除以batch size余数为1时会报错 6、超参数report_dim需改为735 |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ---- | ------------------------------------------------------------ |
-| On the automatic generation of medical imaging reports (Coatt) | https://github.com/ZexinYan/Medical-Report-Generation        |      |                                                              |
